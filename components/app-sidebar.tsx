@@ -173,14 +173,7 @@
 import * as React from "react";
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
-import {
-  IconChartBar,
-  IconDashboard,
-  IconFolder,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconUsers,
-} from "@tabler/icons-react";
+import { IconInnerShadowTop } from "@tabler/icons-react";
 import {
   Sidebar,
   SidebarContent,
@@ -191,73 +184,155 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+// const data = {
+//   user: {
+//     name: "nithin",
+//     email: "nithin@example.com",
+//     avatar: "/avatars/shadcn.jpg",
+//   },
+//   // Ensure that navMain is properly defined
+//   navMain: [
+//     {
+//       title: "Home",
+//       url: "/",
+//       icon: IconDashboard,
+//       section: "Dashboard", // Grouped under "Dashboard"
+//     },
+//     {
+//       title: "Analysis",
+//       url: "/analysis",
+//       icon: IconListDetails,
+//       section: "Analytics & Reports", // Grouped under "Analytics & Reports"
+//     },
+//     {
+//       title: "Reports",
+//       url: "/reports",
+//       icon: IconChartBar,
+//       section: "Analytics & Reports",
+//     },
+//     {
+//       title: "Users",
+//       url: "/users",
+//       icon: IconFolder,
+//       section: "Application", // Grouped under "Application"
+//     },
+//     {
+//       title: "Questions",
+//       url: "/questions",
+//       icon: IconUsers,
+//       section: "Application",
+//     },
+//     {
+//       title: "Tags",
+//       url: "/tags",
+//       icon: IconUsers,
+//       section: "Application",
+//     },
+//     {
+//       title: "Events",
+//       url: "/events",
+//       icon: IconUsers,
+//       section: "KentX", // Grouped under "KentX"
+//     },
+//     {
+//       title: "Magazines",
+//       url: "/magazines",
+//       icon: IconUsers,
+//       section: "KentX",
+//     },
+//     {
+//       title: "Schedule",
+//       url: "/schedule",
+//       icon: IconUsers,
+//       section: "KentX",
+//     },
+//     {
+//       title: "Settings",
+//       url: "/settings",
+//       icon: IconUsers,
+//       section: "Settings", // A separate section for settings
+//     },
+//   ],
+// };
+import {
+  IconDashboard,
+  IconChartBar,
+  IconFileText,
+  IconUsers,
+  IconTags,
+  IconCalendarEvent,
+  IconBook,
+  IconListCheck,
+  IconSettings,
+  IconMessages,
+} from "@tabler/icons-react";
+
 const data = {
   user: {
     name: "nithin",
     email: "nithin@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  // Ensure that navMain is properly defined
   navMain: [
     {
       title: "Home",
-      url: "/home",
-      icon: IconDashboard,
-      section: "Dashboard", // Grouped under "Dashboard"
+      url: "/",
+      icon: IconDashboard, // Dashboard icon for home
+      section: "Dashboard",
     },
     {
       title: "Analysis",
       url: "/analysis",
-      icon: IconListDetails,
-      section: "Analytics & Reports", // Grouped under "Analytics & Reports"
+      icon: IconChartBar, // Bar chart icon for analysis
+      section: "Analytics & Reports",
     },
     {
       title: "Reports",
       url: "/reports",
-      icon: IconChartBar,
+      icon: IconFileText, // File text icon for reports
       section: "Analytics & Reports",
     },
     {
       title: "Users",
       url: "/users",
-      icon: IconFolder,
-      section: "Application", // Grouped under "Application"
+      icon: IconUsers, // Users icon for managing users
+      section: "Application",
     },
     {
       title: "Questions",
       url: "/questions",
-      icon: IconUsers,
+      icon: IconMessages, // Chat/message icon for questions
       section: "Application",
     },
     {
       title: "Tags",
       url: "/tags",
-      icon: IconUsers,
+      icon: IconTags, // Tag icon for tags
       section: "Application",
     },
     {
       title: "Events",
       url: "/events",
-      icon: IconUsers,
-      section: "KentX", // Grouped under "KentX"
+      icon: IconCalendarEvent, // Calendar event icon for events
+      section: "KentX",
     },
     {
       title: "Magazines",
       url: "/magazines",
-      icon: IconUsers,
+      icon: IconBook, // Book icon for magazines
       section: "KentX",
     },
     {
       title: "Schedule",
       url: "/schedule",
-      icon: IconUsers,
+      icon: IconListCheck, // Checklist icon for schedule
       section: "KentX",
     },
     {
       title: "Settings",
       url: "/settings",
-      icon: IconUsers,
-      section: "Settings", // A separate section for settings
+      icon: IconSettings, // Settings icon for application settings
+      section: "Settings",
     },
   ],
 };
