@@ -1,53 +1,49 @@
-// import { AppSidebar } from "@/components/app-sidebar";
-// import {
-//   Breadcrumb,
-//   BreadcrumbItem,
-//   BreadcrumbLink,
-//   BreadcrumbList,
-//   BreadcrumbPage,
-//   BreadcrumbSeparator,
-// } from "@/components/ui/breadcrumb";
-// import { Separator } from "@/components/ui/separator";
-// import {
-//   SidebarInset,
-//   SidebarProvider,
-//   SidebarTrigger,
-// } from "@/components/ui/sidebar";
+import { StatCard } from "@/components/cards/StatCard";
+import Heading from "@/components/header/Heading";
 
-// export default function App() {
-//   return (
-//     <SidebarProvider>
-//       <AppSidebar />
-//       <SidebarInset>
-//         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-//           <SidebarTrigger className="-ml-1" />
-//           <Separator orientation="vertical" className="mr-2 h-4" />
-//           <Breadcrumb>
-//             <BreadcrumbList>
-//               <BreadcrumbItem className="hidden md:block">
-//                 <BreadcrumbLink href="#">Build For Better</BreadcrumbLink>
-//               </BreadcrumbItem>
-//               <BreadcrumbSeparator className="hidden md:block" />
-//               <BreadcrumbItem>
-//                 <BreadcrumbPage>
-//                   Welcome Admin 👋 - Where You can access everything
-//                 </BreadcrumbPage>
-//               </BreadcrumbItem>
-//             </BreadcrumbList>
-//           </Breadcrumb>
-//         </header>
-//         <h1>Hello</h1>
-//       </SidebarInset>
-//     </SidebarProvider>
-//   );
-// }
-export default function Page() {
+const Home = () => {
   return (
-    <div>
-      <h1>Hello, Admin!</h1>
-      <p>
-        Welcome to your dashboard. Here, you can manage everything efficiently.
-      </p>
-    </div>
+    <section>
+      <Heading title="Flashcode" subtag="Build for better" />
+      <hr className="bg-white h-px w-1/2 mx-auto border-0 my-4" />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 px-4 lg:px-6 py-6">
+        <StatCard
+          title="Total Revenue"
+          value="$1,250.00"
+          change="+12.5%"
+          trend="Trending up this month"
+          subtext="Visitors for the last 6 months"
+          icon="up"
+        />
+        <StatCard
+          title="New Customers"
+          value="1,234"
+          change="-20%"
+          trend="Down 20% this period"
+          subtext="Acquisition needs attention"
+          icon="down"
+        />
+        <StatCard
+          title="Active Accounts"
+          value="45,678"
+          change="+12.5%"
+          trend="Strong user retention"
+          subtext="Engagement exceed targets"
+          icon="up"
+        />
+        <StatCard
+          title="Growth Rate"
+          value="4.5%"
+          change="+4.5%"
+          trend="Steady performance"
+          subtext="Meets growth projections"
+          icon="up"
+        />
+      </div>
+      <hr className="bg-white h-px w-full mx-auto border-0 my-4" />
+    </section>
   );
-}
+};
+
+export default Home;
