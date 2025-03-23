@@ -24,6 +24,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { XIcon } from "lucide-react";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -182,12 +183,39 @@ function Sidebar({
 
   if (isMobile) {
     return (
+      // <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
+      //   <SheetContent
+      //     data-sidebar="sidebar"
+      //     data-slot="sidebar"
+      //     data-mobile="true"
+      //     className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
+      //     style={
+      //       {
+      //         "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
+      //       } as React.CSSProperties
+      //     }
+      //     side={side}
+      //   >
+      //     <SheetHeader className="sr-only">
+      //       <SheetTitle>Sidebar</SheetTitle>
+      //       <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+      //     </SheetHeader>
+      //     <button
+      //       onClick={() => setOpenMobile(false)}
+      //       className="absolute top-2 right-2 z-50 text-white md:hidden"
+      //     >
+      //       <XIcon className="w-5 h-5" />
+      //       <span className="sr-only">Close sidebar</span>
+      //     </button>
+      //     <div className="flex h-full w-full flex-col">{children}</div>
+      //   </SheetContent>
+      // </Sheet>
       <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
         <SheetContent
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
+          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0"
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -199,6 +227,16 @@ function Sidebar({
             <SheetTitle>Sidebar</SheetTitle>
             <SheetDescription>Displays the mobile sidebar.</SheetDescription>
           </SheetHeader>
+
+          {/* ✅ X Close Button */}
+          <button
+            onClick={() => setOpenMobile(false)}
+            className="absolute top-2 right-2 z-50 text-white md:hidden"
+          >
+            <XIcon className="w-5 h-5" />
+            <span className="sr-only">Close sidebar</span>
+          </button>
+
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
       </Sheet>
