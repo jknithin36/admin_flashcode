@@ -4,7 +4,6 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
-
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -210,12 +209,12 @@ function Sidebar({
       //     <div className="flex h-full w-full flex-col">{children}</div>
       //   </SheetContent>
       // </Sheet>
-      <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
+      <Sheet open={openMobile} onOpenChange={setOpenMobile}>
         <SheetContent
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0"
+          className="bg-sidebar text-sidebar-foreground w-[var(--sidebar-width)] px-4 py-2 pt-6 md:hidden"
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -223,21 +222,28 @@ function Sidebar({
           }
           side={side}
         >
+          {/* Required empty header to avoid errors */}
           <SheetHeader className="sr-only">
-            <SheetTitle>Sidebar</SheetTitle>
-            <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+            <SheetTitle />
+            <SheetDescription />
           </SheetHeader>
 
-          {/* ✅ X Close Button */}
+          {/* Close Icon */}
           <button
             onClick={() => setOpenMobile(false)}
-            className="absolute top-2 right-2 z-50 text-white md:hidden"
+            className="absolute top-4 right-4 z-50 text-white"
           >
             <XIcon className="w-5 h-5" />
             <span className="sr-only">Close sidebar</span>
           </button>
 
-          <div className="flex h-full w-full flex-col">{children}</div>
+          {/* Sidebar children with click-to-close */}
+          <div
+            className="flex h-full w-full flex-col gap-2"
+            onClick={() => setOpenMobile(false)} // ✅ closes on any click
+          >
+            {children}
+          </div>
         </SheetContent>
       </Sheet>
     );
