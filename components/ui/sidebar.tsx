@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+
 import {
   Sheet,
   SheetContent,
@@ -23,7 +24,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { XIcon } from "lucide-react";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -214,7 +214,7 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground w-[var(--sidebar-width)] px-4 py-2 pt-6 md:hidden"
+          className="bg-sidebar text-sidebar-foreground w-[var(--sidebar-width)] px-4 py-2 pt-6 md:hidden [&>button[data-state=open]]:hidden"
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -222,28 +222,13 @@ function Sidebar({
           }
           side={side}
         >
-          {/* Required empty header to avoid errors */}
+          {/* Optional empty header */}
           <SheetHeader className="sr-only">
             <SheetTitle />
             <SheetDescription />
           </SheetHeader>
 
-          {/* Close Icon */}
-          <button
-            onClick={() => setOpenMobile(false)}
-            className="absolute top-4 right-4 z-50 text-white"
-          >
-            <XIcon className="w-5 h-5" />
-            <span className="sr-only">Close sidebar</span>
-          </button>
-
-          {/* Sidebar children with click-to-close */}
-          <div
-            className="flex h-full w-full flex-col gap-2"
-            onClick={() => setOpenMobile(false)} // ✅ closes on any click
-          >
-            {children}
-          </div>
+          <div className="flex h-full w-full flex-col gap-2">{children}</div>
         </SheetContent>
       </Sheet>
     );
