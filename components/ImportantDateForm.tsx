@@ -138,7 +138,7 @@ export function ImportantDateForm() {
 
           <button
             type="submit"
-            className="w-full p-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200"
+            className="w-full p-3 bg-white text-black font-semibold rounded-lg transition duration-200"
           >
             Add Important Date
           </button>

@@ -103,11 +103,12 @@ const Home = async () => {
           />
         )}
       </div>
-
+      <div className="px-6 py-4 mt-5">
+        <UserData />
+      </div>
       <div className="px-6 py-4 mt-5">
         <FlashcodeChart />
       </div>
-      <UserData />
     </section>
   );
 };

@@ -263,16 +263,18 @@ export function ViewsChart() {
           </ToggleGroup>
 
           {/* Mobile Select */}
-          <Select value={timeRange} onValueChange={setTimeRange}>
-            <SelectTrigger className="bg-gray-800 text-white border-gray-700">
-              <SelectValue placeholder="Select Time Range" />
-            </SelectTrigger>
-            <SelectContent className="bg-gray-900 text-white">
-              <SelectItem value="year">Year</SelectItem>
-              <SelectItem value="month">Month</SelectItem>
-              <SelectItem value="week">Week</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="sm:hidden">
+            <Select value={timeRange} onValueChange={setTimeRange}>
+              <SelectTrigger className="bg-gray-800 text-white border-gray-700">
+                <SelectValue placeholder="Select Time Range" />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-900 text-white">
+                <SelectItem value="year">Year</SelectItem>
+                <SelectItem value="month">Month</SelectItem>
+                <SelectItem value="week">Week</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </CardHeader>
 
