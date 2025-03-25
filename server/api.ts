@@ -160,7 +160,27 @@ export async function fetchQuestionsAnswersTrend(
 }
 
 // Views Trend
-export async function fetchViewsTrend(range: string): Promise<TrendData[]> {
+// export async function fetchViewsTrend(range: string): Promise<TrendData[]> {
+//   try {
+//     console.log(`Fetching views trend for: ${range}`);
+//     const response = await fetch(`${BASE_URL}/api/views/trend?range=${range}`);
+
+//     if (!response.ok) {
+//       const errorText = await response.text();
+//       throw new Error(
+//         `Failed to fetch views trend: ${response.status} - ${errorText}`
+//       );
+//     }
+
+//     const data = await response.json();
+//     console.log("Fetched Data:", data);
+//     return data.trend_data;
+//   } catch (error) {
+//     console.error("Error fetching views trend:", error);
+//     return [];
+//   }
+// }
+export async function fetchViewsTrend(range: string) {
   try {
     console.log(`Fetching views trend for: ${range}`);
     const response = await fetch(`${BASE_URL}/api/views/trend?range=${range}`);
@@ -173,11 +193,12 @@ export async function fetchViewsTrend(range: string): Promise<TrendData[]> {
     }
 
     const data = await response.json();
-    console.log("Fetched Data:", data);
-    return data.trend_data;
+    console.log("Fetched Data:", data); // ✅ Should contain `trend_data`
+
+    return data.trend_data; // ✅ Extract only trend_data array
   } catch (error) {
     console.error("Error fetching views trend:", error);
-    return [];
+    return []; // ✅ Return empty array on error
   }
 }
 

@@ -35,20 +35,18 @@ export function ViewsChart() {
   >([]);
   const [loading, setLoading] = React.useState(false);
 
-  // 📌 Fetch Data When Time Range Changes
   React.useEffect(() => {
     async function loadData() {
       setLoading(true);
-
       const rawData = await fetchViewsTrend(timeRange);
+      console.log("Fetched Data:", rawData); // Debugging API response
 
-      // ✅ Convert TrendData[] to { date, views }[]
-      const mappedData = rawData.map((item) => ({
-        date: item.date,
-        views: item.answers, // Or `item.questions` if you prefer
-      }));
-
-      setChartData(mappedData);
+      // Ensure data is sorted chronologically
+      const sortedData = rawData.sort(
+        (a: { date: string }, b: { date: string }) =>
+          new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
+      setChartData(sortedData);
       setLoading(false);
     }
 
@@ -109,54 +107,56 @@ export function ViewsChart() {
       </CardHeader>
 
       <CardContent className="p-4">
-        <ResponsiveContainer width="100%" height={250}>
-          <AreaChart data={chartData}>
-            <defs>
-              <linearGradient id="viewsGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#3498DB" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#3498DB" stopOpacity={0.1} />
-              </linearGradient>
-            </defs>
+        {chartData.length === 0 && !loading ? (
+          <p className="text-center text-gray-400 py-8">
+            No data available for this range.
+          </p>
+        ) : (
+          <ResponsiveContainer width="100%" height={250}>
+            <AreaChart data={chartData}>
+              <defs>
+                <linearGradient id="viewsGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#3498DB" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#3498DB" stopOpacity={0.1} />
+                </linearGradient>
+              </defs>
 
-            <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
-            <XAxis
-              dataKey="date"
-              tick={{ fill: "#ffffff" }}
-              tickFormatter={(value) =>
-                timeRange === "year"
-                  ? new Date(value + "-01").toLocaleDateString("en-US", {
-                      month: "short",
-                      year: "numeric",
-                    })
-                  : new Date(value).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                    })
-              }
-            />
-            <YAxis tick={{ fill: "#ffffff" }} />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "#1a1a1a",
-                borderRadius: "8px",
-              }}
-            />
-            <Legend
-              verticalAlign="top"
-              height={36}
-              wrapperStyle={{ color: "white" }}
-            />
-
-            <Area
-              type="monotone"
-              dataKey="views"
-              stroke="#3498DB"
-              strokeWidth={2}
-              fill="url(#viewsGradient)"
-              dot={{ fill: "#3498DB", strokeWidth: 2, r: 3 }}
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
+              <XAxis
+                dataKey="date"
+                tick={{ fill: "#ffffff" }}
+                tickFormatter={(value) =>
+                  timeRange === "year"
+                    ? value // Show only the year directly
+                    : new Date(value).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                      })
+                }
+              />
+              <YAxis tick={{ fill: "#ffffff" }} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#1a1a1a",
+                  borderRadius: "8px",
+                }}
+              />
+              <Legend
+                verticalAlign="top"
+                height={36}
+                wrapperStyle={{ color: "white" }}
+              />
+              <Area
+                type="monotone"
+                dataKey="views"
+                stroke="#3498DB"
+                strokeWidth={2}
+                fill="url(#viewsGradient)"
+                dot={{ fill: "#3498DB", strokeWidth: 2, r: 3 }}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        )}
       </CardContent>
     </Card>
   );
