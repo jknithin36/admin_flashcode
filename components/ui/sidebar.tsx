@@ -182,33 +182,6 @@ function Sidebar({
 
   if (isMobile) {
     return (
-      // <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
-      //   <SheetContent
-      //     data-sidebar="sidebar"
-      //     data-slot="sidebar"
-      //     data-mobile="true"
-      //     className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
-      //     style={
-      //       {
-      //         "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
-      //       } as React.CSSProperties
-      //     }
-      //     side={side}
-      //   >
-      //     <SheetHeader className="sr-only">
-      //       <SheetTitle>Sidebar</SheetTitle>
-      //       <SheetDescription>Displays the mobile sidebar.</SheetDescription>
-      //     </SheetHeader>
-      //     <button
-      //       onClick={() => setOpenMobile(false)}
-      //       className="absolute top-2 right-2 z-50 text-white md:hidden"
-      //     >
-      //       <XIcon className="w-5 h-5" />
-      //       <span className="sr-only">Close sidebar</span>
-      //     </button>
-      //     <div className="flex h-full w-full flex-col">{children}</div>
-      //   </SheetContent>
-      // </Sheet>
       <Sheet open={openMobile} onOpenChange={setOpenMobile}>
         <SheetContent
           data-sidebar="sidebar"
@@ -216,19 +189,35 @@ function Sidebar({
           data-mobile="true"
           className="bg-sidebar text-sidebar-foreground w-[var(--sidebar-width)] px-4 py-2 pt-6 md:hidden [&>button[data-state=open]]:hidden"
           style={
-            {
-              "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
-            } as React.CSSProperties
+            { "--sidebar-width": SIDEBAR_WIDTH_MOBILE } as React.CSSProperties
           }
           side={side}
         >
-          {/* Optional empty header */}
           <SheetHeader className="sr-only">
             <SheetTitle />
             <SheetDescription />
           </SheetHeader>
 
-          <div className="flex h-full w-full flex-col gap-2">{children}</div>
+          {/* ✅ Properly handling children and fixing TypeScript errors */}
+          <div className="flex h-full w-full flex-col gap-2">
+            {React.Children.map(children, (child) => {
+              if (React.isValidElement(child)) {
+                const typedChild = child as React.ReactElement<{
+                  onClick?: (e: React.MouseEvent) => void;
+                }>;
+                return React.cloneElement(typedChild, {
+                  onClick: (e: React.MouseEvent) => {
+                    e.stopPropagation(); // Prevents immediate closure
+                    setOpenMobile(false); // ✅ Closes sidebar on mobile
+                    if (typedChild.props.onClick) {
+                      typedChild.props.onClick(e); // ✅ Preserve original onClick behavior
+                    }
+                  },
+                });
+              }
+              return child;
+            })}
+          </div>
         </SheetContent>
       </Sheet>
     );
