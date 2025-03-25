@@ -22,7 +22,7 @@ const Home = async () => {
 
   return (
     <section>
-      <Heading title="Flashcode" subtag="Build for better" />
+      <Heading title="Flashcode" subtag="Built for better" />
       <hr className="bg-white h-px w-1/2 mx-auto border-0 my-4" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 px-4 lg:px-6 py-6">
