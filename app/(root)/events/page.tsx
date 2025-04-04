@@ -82,6 +82,7 @@ export default function EventForm() {
       fetchEvents();
     } catch (error) {
       toast.error("\u274C Could not add event");
+      console.log(error);
     } finally {
       setLoading(false);
     }

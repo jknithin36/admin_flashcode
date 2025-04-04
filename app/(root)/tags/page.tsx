@@ -25,11 +25,27 @@ interface TagData {
   hasIcon?: boolean;
 }
 
+interface ApiTagResponse {
+  id: string;
+  name: string;
+  questions: number;
+}
+
 interface TopTag {
   tag: string;
   count: number;
   percentage: number;
   createdAt: string;
+}
+
+interface CustomLabelProps {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  percent: number;
+  index: number;
 }
 
 const dummyTagsWithoutIcons: { tag: string; count: number }[] = [
@@ -57,8 +73,8 @@ export default function TagsPage() {
   const fetchTags = async () => {
     try {
       const res = await fetch(`${BASE_URL}/api/tags/`);
-      const data = await res.json();
-      const formatted = data.map((tag: any) => ({
+      const data: ApiTagResponse[] = await res.json();
+      const formatted: TagData[] = data.map((tag) => ({
         id: tag.id,
         tag: tag.name,
         count: tag.questions,
@@ -105,12 +121,13 @@ export default function TagsPage() {
     innerRadius,
     outerRadius,
     percent,
-    name,
-  }: any) => {
+    index,
+  }: CustomLabelProps) => {
     const RADIAN = Math.PI / 180;
     const radius = innerRadius + (outerRadius - innerRadius) * 1.1;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
     return (
       <text
         x={x}
@@ -120,7 +137,7 @@ export default function TagsPage() {
         dominantBaseline="central"
         className="text-xs font-medium"
       >
-        {`${name} (${(percent * 100).toFixed(0)}%)`}
+        {`${topTags[index].tag} (${(percent * 100).toFixed(0)}%)`}
       </text>
     );
   };
@@ -224,12 +241,7 @@ export default function TagsPage() {
                     cy="50%"
                     outerRadius={100}
                     labelLine={false}
-                    label={(props) =>
-                      renderCustomLabel({
-                        ...props,
-                        name: topTags[props.index].tag,
-                      })
-                    }
+                    label={renderCustomLabel}
                   >
                     {topTags.map((entry, index) => (
                       <Cell
