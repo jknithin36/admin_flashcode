@@ -71,9 +71,7 @@ export default function QuestionsPage() {
 
   return (
     <div className="p-10 w-full">
-      <h1 className="text-3xl font-bold text-white mb-1">
-        ❓ Question Insights
-      </h1>
+      <h1 className="text-3xl font-bold text-white mb-1">Question Insights</h1>
       <p className="text-gray-400 mb-6">
         Browse, analyze, and manage all questions posted on Flashcode. Monitor
         engagement with upvotes, answers, and actions.

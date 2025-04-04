@@ -108,7 +108,7 @@ export default function AddMagazineForm() {
       {/* Page Heading */}
       <div className="mb-10">
         <h1 className="text-4xl font-extrabold text-white mb-2">
-          📚 Magazine Management
+          Magazine Management
         </h1>
         <p className="text-gray-400 text-sm max-w-2xl">
           Easily upload, view, and manage your organization magazines. Provide
@@ -124,7 +124,7 @@ export default function AddMagazineForm() {
           <Card className="bg-black text-white border border-neutral-700 rounded-xl shadow-lg">
             <CardHeader>
               <CardTitle className="text-3xl font-bold text-white">
-                📚 Add a New Magazine
+                Add a New Magazine
               </CardTitle>
               <p className="text-gray-400 mt-1 text-sm">
                 Fill out the form below to upload a new magazine to Flashcode.
@@ -194,7 +194,7 @@ export default function AddMagazineForm() {
         {/* Right: Magazine Cards */}
         <div className="w-full lg:w-1/2">
           <h2 className="text-2xl text-white font-bold mb-4 border-b border-gray-700 pb-2">
-            📰 All Magazines
+            All Magazines
           </h2>
           {magazines.length === 0 ? (
             <p className="text-sm text-gray-400">No magazines added yet.</p>

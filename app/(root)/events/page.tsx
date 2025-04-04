@@ -14,6 +14,7 @@ import {
   MapPinIcon,
   LinkIcon,
   FileTextIcon,
+  Trash2Icon,
 } from "lucide-react";
 import { DataTable } from "@/components/data-table";
 import { ColumnDef } from "@tanstack/react-table";
@@ -55,7 +56,7 @@ export default function EventForm() {
       const data = await res.json();
       setEvents(data);
     } catch {
-      toast.error("\u274C Failed to fetch events");
+      toast.error("❌ Failed to fetch events");
     }
   };
 
@@ -77,15 +78,52 @@ export default function EventForm() {
 
       if (!response.ok) throw new Error("Failed to add event");
 
-      toast.success("\ud83c\udf89 Event added successfully!");
+      toast.success("🎉 Event added successfully!");
       reset();
       fetchEvents();
     } catch (error) {
-      toast.error("\u274C Could not add event");
+      toast.error("❌ Could not add event");
       console.log(error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDelete = (id: string) => {
+    toast.custom((t) => (
+      <div className="bg-white p-4 rounded-xl shadow-md text-sm text-black w-[300px] space-y-3">
+        <p className="font-medium">
+          Are you sure you want to delete this event?
+        </p>
+        <div className="flex justify-end gap-2">
+          <Button variant="outline" size="sm" onClick={() => toast.dismiss(t)}>
+            Cancel
+          </Button>
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={async () => {
+              toast.dismiss(t);
+              toast.promise(
+                fetch(`https://serverflash.onrender.com/events/delete/${id}`, {
+                  method: "DELETE",
+                }).then((res) => {
+                  if (!res.ok) throw new Error("Failed to delete");
+                  fetchEvents();
+                }),
+                {
+                  loading: "Deleting...",
+                  success: "🗑️ Event deleted successfully!",
+                  error: "❌ Could not delete event",
+                }
+              );
+            }}
+          >
+            Delete
+          </Button>
+        </div>
+      </div>
+    ));
   };
 
   const columns: ColumnDef<Event>[] = [
@@ -109,6 +147,19 @@ export default function EventForm() {
         >
           View
         </a>
+      ),
+    },
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }) => (
+        <Button
+          variant="destructive"
+          size="icon"
+          onClick={() => handleDelete(row.original._id)}
+        >
+          <Trash2Icon size={16} />
+        </Button>
       ),
     },
   ];

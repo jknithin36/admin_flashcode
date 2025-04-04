@@ -145,7 +145,7 @@ export default function TagsPage() {
   return (
     <div className="p-10 space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-white mb-1">🏷️ Tags Overview</h1>
+        <h1 className="text-3xl font-bold text-white mb-1"> Tags Overview</h1>
         <p className="text-gray-400 mb-4">
           Analyze and manage all coding language tags used in Flashcode. View
           usage distribution, search tags, and export tag data.
@@ -159,7 +159,7 @@ export default function TagsPage() {
         {/* Tag Table */}
         <Card>
           <CardHeader>
-            <CardTitle>📚 All Tags List</CardTitle>
+            <CardTitle> All Tags List</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="mb-4 flex justify-between items-center">
@@ -225,7 +225,7 @@ export default function TagsPage() {
         <div className="space-y-6">
           <Card className="min-h-[360px]">
             <CardHeader>
-              <CardTitle>📊 Tag Distribution</CardTitle>
+              <CardTitle> Tag Distribution</CardTitle>
               <p className="text-sm text-muted-foreground">
                 Breakdown of top-used tags across all questions.
               </p>
@@ -258,7 +258,7 @@ export default function TagsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>❗ Tags Missing Icons</CardTitle>
+              <CardTitle> Tags Missing Icons</CardTitle>
               <p className="text-sm text-muted-foreground">
                 The following tags don’t have associated icons.
               </p>

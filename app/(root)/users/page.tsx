@@ -73,7 +73,7 @@ export default function UsersPage() {
 
   return (
     <div className="p-10 w-full">
-      <h1 className="text-3xl font-bold text-white mb-1">👥 User Management</h1>
+      <h1 className="text-3xl font-bold text-white mb-1">User Management</h1>
       <p className="text-gray-400 mb-6">
         Manage registered Flashcode users, monitor engagement, and perform
         actions.
