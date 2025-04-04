@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FlashCode – Admin Dashboard
 
-## Getting Started
+FlashCode is a modern, full-featured Q&A platform built to foster interactive learning. This repository contains the **Admin Dashboard** for managing users, questions, tags, events, magazines, and academic schedules, with rich analytics and real-time insights.
 
-First, run the development server:
+Built with a **Next.js frontend** powered by **ShadCN UI**, and a **Flask + MongoDB backend**
+
+## Tech Stack
+
+### Frontend
+
+- **Framework**: Next.js (React + TypeScript)
+- **Styling**: Tailwind CSS + ShadCN UI + Radix Primitives
+- **Auth**: Clerk (JWT-based)
+- **Validation**: React Hook Form + Zod
+- **Charts**: Recharts
+- **Calendar**: FullCalendar
+- **Interactivity**: DnD Kit
+- **Export**: react-csv, downloadable reports
+- **Deployment Ready**: Vercel
+
+### Backend
+
+- **Framework**: Flask (Python)
+- **Database**: MongoDB (via PyMongo)
+- **Media Storage**: Cloudinary (for magazine covers)
+- **Deployment Ready**: Render-compatible via `render.yaml`
+- **Architecture**: Modular REST API with Flask Blueprints
+
+---
+
+## 🎯 Key Features
+
+### 🔒 Authentication
+
+- Secure Clerk integration with middleware protection for all routes
+- Profile and settings management with username/email updates
+
+### 📊 Dashboard Highlights
+
+- Quick stats: Total Users, Questions, Answers, Answer Rate
+- Activity drop alerts and leaderboard for contributors
+- Interactive “Questions vs Answers” chart
+- Views trend graph with time filter (day/week/month)
+
+### 📅 Calendar & Scheduling
+
+- Quick calendar view with FullCalendar (project deadlines, meetings)
+- Admin can manage semester-wise academic dates (Spring/Summer/Fall)
+- Event Manager with fields like title, time, location, link, description
+
+### 📁 Content Management
+
+- **Users**: Search, view stats, CSV export
+- **Questions**: Moderate, filter, sort
+- **Tags**: Usage stats, pie chart, missing icon detection
+- **Magazines**: Upload cover image, title, link, and description
+
+---
+
+## 🧭 Route Structure
+
+| Route        | Feature                                          |
+| ------------ | ------------------------------------------------ |
+| `/`          | Home dashboard with metrics and leaderboard      |
+| `/quick`     | Quick calendar analysis                          |
+| `/analysis`  | Analytics page: trends, charts                   |
+| `/reports`   | (Coming soon) report exports                     |
+| `/users`     | User management and statistics                   |
+| `/questions` | Question moderation and insights                 |
+| `/tags`      | Tag usage breakdown and chart                    |
+| `/events`    | Event management dashboard                       |
+| `/magazines` | Upload and manage digital magazines              |
+| `/schedule`  | Add/view important academic dates                |
+| `/settings`  | Clerk-authenticated profile and account settings |
+
+---
+
+## Why ShadCN UI?
+
+ShadCN UI was essential in building a professional-grade, accessible UI rapidly. Leveraging **Radix Primitives** and pre-styled components allowed for:
+
+- Fast layout building (tables, modals, dropdowns, tooltips)
+- Consistent design across routes
+- Easy dark mode integration
+- Clean code and developer-friendly structure
+
+---
+
+## 🌐 Backend API Overview
+
+RESTful endpoints serve all data to the frontend:
+
+- `GET/POST/PUT/DELETE /users`
+- `GET/POST /questions`, `/answers`
+- `GET/POST /tags`
+- `GET/POST /events`
+- `GET/POST /schedule`
+- `GET/POST /magazine`
+- `GET /analytics`
+
+All API routes use structured collections from MongoDB and respond in JSON.
+
+---
+
+## 🧠 Project Outcome
+
+FlashCode Admin Dashboard demonstrates end-to-end engineering using:
+
+- 🧱 Modern UI frameworks (Next.js + ShadCN)
+- ⚙️ Scalable backend logic (Flask + MongoDB)
+- 📊 Real-time data visualization
+- 🔐 Secure multi-role admin tools
+- 📁 Seamless form handling and export utilities
+
+Perfect for academic platforms, learning communities, or coding clubs to manage interactive content at scale.
+
+---
+
+## 🛠️ Getting Started
+
+### Frontend
 
 ```bash
+cd admin_flashcode
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
