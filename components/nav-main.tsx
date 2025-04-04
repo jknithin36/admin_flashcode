@@ -43,7 +43,7 @@ export function NavMain({
                   isActive={pathname === "/quick"}
                   className="pl-4 w-full h-10 flex items-center justify-start rounded-md transition text-sm font-medium"
                 >
-                  <span>Quick Analysis</span>
+                  <span>Calendar</span>
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
