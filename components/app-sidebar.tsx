@@ -2,11 +2,9 @@
 
 import * as React from "react";
 import { NavMain } from "@/components/nav-main";
-import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar";
 
@@ -52,9 +50,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       {/* Footer (User Info) */}
-      <SidebarFooter className="py-4">
-        <NavUser user={data.user} />
-      </SidebarFooter>
     </Sidebar>
   );
 }

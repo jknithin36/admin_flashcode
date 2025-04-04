@@ -151,3 +151,19 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes glow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+}
+
+.animate-glow {
+  animation: glow 8s ease-in-out infinite;
+}

@@ -1,3 +1,4 @@
+// const BASE_URL = "https://serverflash.onrender.com";
 const BASE_URL = "https://serverflash.onrender.com";
 
 // ---------------------- Interfaces ----------------------
@@ -45,6 +46,26 @@ export interface TrendData {
   date: string;
   questions: number;
   answers: number;
+}
+
+export interface Tag {
+  id: string;
+  name: string;
+  questions: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TagDistribution {
+  tag: string;
+  count: number;
+}
+
+export interface TopTag {
+  tag: string;
+  count: number;
+  percentage: number;
+  createdAt: string;
 }
 
 // ---------------------- API Calls ----------------------
@@ -223,4 +244,51 @@ export async function addImportantDate(eventData: {
     console.error("Error adding important date:", error);
     return null;
   }
+}
+
+export async function fetchAllTags(): Promise<Tag[]> {
+  try {
+    const response = await fetch(`${BASE_URL}/api/tags/`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch tags");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching tags:", error);
+    return [];
+  }
+}
+
+export async function fetchTagDistribution(): Promise<TagDistribution[]> {
+  try {
+    const response = await fetch(`${BASE_URL}/api/tags/distribution`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch tag distribution");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching tag distribution:", error);
+    return [];
+  }
+}
+
+export async function fetchTopTags(): Promise<TopTag[]> {
+  try {
+    const res = await fetch(`${BASE_URL}/api/tags/top`);
+    const data = await res.json();
+    return data.top_tags;
+  } catch (err) {
+    console.error("Failed to fetch top tags:", err);
+    return [];
+  }
+}
+export async function addMagazine(formData: FormData) {
+  const res = await fetch(
+    "https://serverflash.onrender.com/api/magazines/add",
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+  return res;
 }
